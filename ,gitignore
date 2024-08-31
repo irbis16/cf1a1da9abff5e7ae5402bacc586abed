@@ -20,6 +20,7 @@ Thumbs.db
 /bitrix/activities/
 /bitrix/admin/
 /bitrix/backup/
+/bitrix/cache/
 /bitrix/click.php
 /bitrix/components/
 /bitrix/coupon_activation.php
