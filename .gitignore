@@ -1,7 +1,14 @@
 # исключаем папку /bitrix кроме некоторых подпапок
 #!/bitrix
 /bitrix/
-
+/company/
+/contacts/
+/include/
+/login/
+/news/
+/product/
+/search/
+/services/
 # оставляем печатные формы интернет-магазина
 #!/bitrix/admin/
 #/bitrix/admin/*
@@ -49,7 +56,7 @@ ehthumbs.db
 *.zip*  
 *.tar
 *.tar*
-*.enc
+*.encgit rm -r --cached .
 *.enc*
 *.gz
 *.gz*
