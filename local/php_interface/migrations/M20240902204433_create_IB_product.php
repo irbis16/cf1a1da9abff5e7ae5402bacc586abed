@@ -3,11 +3,11 @@
 namespace Sprint\Migration;
 
 
-class Version120240830234737 extends Version
+class M20240902204433 extends Version
 {
     protected $author = "admin";
 
-    protected $description = "Продукция";
+    protected $description = "_create_IB_product";
 
     protected $moduleVersion = "4.12.6";
 
@@ -54,7 +54,7 @@ class Version120240830234737 extends Version
   'ACTIVE' => 'Y',
   'SORT' => '500',
   'LIST_PAGE_URL' => '#SITE_DIR#/product/index.php?ID=#IBLOCK_ID#',
-  'DETAIL_PAGE_URL' => '#SITE_DIR#/product/detail.php?ID=#ELEMENT_ID#',
+  'DETAIL_PAGE_URL' => '#SITE_DIR#/product/#ELEMENT_CODE#',
   'SECTION_PAGE_URL' => '#SITE_DIR#/product/list.php?SECTION_ID=#SECTION_ID#',
   'CANONICAL_PAGE_URL' => '',
   'PICTURE' => NULL,
@@ -400,7 +400,123 @@ class Version120240830234737 extends Version
     'VISIBLE' => 'Y',
   ),
 ));
-    $helper->UserOptions()->saveElementGrid($iblockId, array (
+        $helper->Iblock()->saveProperty($iblockId, array (
+  'NAME' => 'Вес',
+  'ACTIVE' => 'Y',
+  'SORT' => '500',
+  'CODE' => 'UF_VES',
+  'DEFAULT_VALUE' => '',
+  'PROPERTY_TYPE' => 'N',
+  'ROW_COUNT' => '1',
+  'COL_COUNT' => '30',
+  'LIST_TYPE' => 'L',
+  'MULTIPLE' => 'N',
+  'XML_ID' => NULL,
+  'FILE_TYPE' => '',
+  'MULTIPLE_CNT' => '5',
+  'LINK_IBLOCK_ID' => '0',
+  'WITH_DESCRIPTION' => 'N',
+  'SEARCHABLE' => 'N',
+  'FILTRABLE' => 'N',
+  'IS_REQUIRED' => 'N',
+  'VERSION' => '1',
+  'USER_TYPE' => NULL,
+  'USER_TYPE_SETTINGS' => 'a:0:{}',
+  'HINT' => '',
+  'FEATURES' => 
+  array (
+    0 => 
+    array (
+      'MODULE_ID' => 'iblock',
+      'FEATURE_ID' => 'DETAIL_PAGE_SHOW',
+      'IS_ENABLED' => 'Y',
+    ),
+    1 => 
+    array (
+      'MODULE_ID' => 'iblock',
+      'FEATURE_ID' => 'LIST_PAGE_SHOW',
+      'IS_ENABLED' => 'Y',
+    ),
+  ),
+));
+            $helper->Iblock()->saveProperty($iblockId, array (
+  'NAME' => 'Единица измерения',
+  'ACTIVE' => 'Y',
+  'SORT' => '500',
+  'CODE' => 'UF_MERA',
+  'DEFAULT_VALUE' => '',
+  'PROPERTY_TYPE' => 'L',
+  'ROW_COUNT' => '1',
+  'COL_COUNT' => '30',
+  'LIST_TYPE' => 'L',
+  'MULTIPLE' => 'N',
+  'XML_ID' => NULL,
+  'FILE_TYPE' => '',
+  'MULTIPLE_CNT' => '5',
+  'LINK_IBLOCK_ID' => '0',
+  'WITH_DESCRIPTION' => 'N',
+  'SEARCHABLE' => 'N',
+  'FILTRABLE' => 'N',
+  'IS_REQUIRED' => 'N',
+  'VERSION' => '1',
+  'USER_TYPE' => NULL,
+  'USER_TYPE_SETTINGS' => 'a:0:{}',
+  'HINT' => '',
+  'VALUES' => 
+  array (
+    0 => 
+    array (
+      'VALUE' => 'г',
+      'DEF' => 'N',
+      'SORT' => '500',
+      'XML_ID' => 'e95e9905178936fc42ff70f9866af7bd',
+    ),
+    1 => 
+    array (
+      'VALUE' => 'кг',
+      'DEF' => 'N',
+      'SORT' => '500',
+      'XML_ID' => '4fef84c81329357dd07747dd98c648e9',
+    ),
+    2 => 
+    array (
+      'VALUE' => 'л',
+      'DEF' => 'N',
+      'SORT' => '500',
+      'XML_ID' => 'df30196f5d2e7ec9edd0fca645d3c5a5',
+    ),
+    3 => 
+    array (
+      'VALUE' => 'уп',
+      'DEF' => 'N',
+      'SORT' => '500',
+      'XML_ID' => 'ac06f1fd9d96506ce9a7feeee7bba71d',
+    ),
+    4 => 
+    array (
+      'VALUE' => 'шт',
+      'DEF' => 'N',
+      'SORT' => '500',
+      'XML_ID' => '600ccc2a4b6559d9f3ade7e74749fdaa',
+    ),
+  ),
+  'FEATURES' => 
+  array (
+    0 => 
+    array (
+      'MODULE_ID' => 'iblock',
+      'FEATURE_ID' => 'DETAIL_PAGE_SHOW',
+      'IS_ENABLED' => 'Y',
+    ),
+    1 => 
+    array (
+      'MODULE_ID' => 'iblock',
+      'FEATURE_ID' => 'LIST_PAGE_SHOW',
+      'IS_ENABLED' => 'Y',
+    ),
+  ),
+));
+        $helper->UserOptions()->saveElementGrid($iblockId, array (
   'views' => 
   array (
     'default' => 
@@ -413,8 +529,8 @@ class Version120240830234737 extends Version
         3 => 'SORT',
         4 => 'TIMESTAMP_X',
         5 => 'ID',
-        6 => 'PROPERTY_9',
-        7 => 'PROPERTY_10',
+        6 => 'PROPERTY_UF_VES',
+        7 => 'PROPERTY_UF_MERA',
       ),
       'columns_sizes' => 
       array (
@@ -467,17 +583,16 @@ class Version120240830234737 extends Version
 ));
 
     }
-	public function down()
+    public function down()
     {
         $helper = $this->getHelperManager();
+        $ok = $helper->Iblock()->deleteIblockIfExists('product');
 
-        $ok = $helper->Iblock()->deleteIblockIfExists('production');
         if ($ok) {
             $this->outSuccess('Инфоблок удален');
-            return true;
         } else {
             $this->outError('Ошибка удаления инфоблока');
-            return false;
         }
     }
+
 }
