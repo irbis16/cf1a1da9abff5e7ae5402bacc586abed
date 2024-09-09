@@ -43,5 +43,6 @@ $ar_res = $res->GetNext();
 if($arParams["DISPLAY_BOTTOM_PAGER"]) {
 	echo $arResult["NAV_STRING"];
 }
+//
 	?>
 
