@@ -1,11 +1,21 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Секретный раздел");
-?><?$APPLICATION->IncludeComponent(
+?>
+<?
+$oDateTime = date('d.m.Y H:i:s');
+$arrFilterCurDate = Array("<DATE_ACTIVE_TO" => $oDateTime);
+$cat_filter[">"."DATE_ACTIVE_TO"] = date("Y-m-d");
+//$arDayFilter['<=DATE_ACTIVE_TO'] = $oDateTime;
+echo $oDateTime;
+?>
+<?
+$APPLICATION->IncludeComponent(
 	"ylab:elements.list", 
 	".default", 
 	array(
-		"ACTIVE_DATE_FORMAT" => "d.m.Y",
+        "FILTER_NAME" => "cat_filter",
+        "ACTIVE_DATE_FORMAT" => "Y-m-d",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -25,16 +35,18 @@ $APPLICATION->SetTitle("Секретный раздел");
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => array(
+            
 			0 => "NAME",
 			1 => "DATE_ACTIVE_FROM",
 			2 => "ACTIVE_FROM",
 			3 => "DATE_ACTIVE_TO",
 			4 => "ACTIVE_TO",
 			5 => "",
+            
 		),
-		"FILTER_NAME" => "",
+
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_ID" => "6",
+		"IBLOCK_CODE" => "security_section",
 		"IBLOCK_TYPE" => "access",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"INCLUDE_SUBSECTIONS" => "Y",

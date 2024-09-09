@@ -11,7 +11,11 @@ $arComponentParameters = array (
         "CACHE" => array(
             "NAME" => 'Настройки кеширования',
             "SORT" => 900            
-        )
+		),
+		"DATA_SEC" => array(
+			"NAME" => 'Статус доступа',
+			"SORT" => 600
+		),
     )
     );
 	$arComponentParameters["PARAMETERS"] = array(
@@ -25,24 +29,31 @@ $arComponentParameters = array (
 		"CACHE_TIME" => Array(
             "DEFAULT" => 3600,      
         ),
+		"ELEM_OLD" => array(
+			"PARENT" => "DATA_SEC",
+			"NAME" => "Только просроченные",
+			"TYPE" => "CHECKBOX",
+			"DEFAULT" => "N",
+			"REFRESH" => "N",
+		),
 	);
 
 
-/*
-	$arComponentParameters = array (
+
+/*	$arComponentParameters = array (
 		"GROUPS" => array (
 			"DATA_SEC" => array(
 				"NAME" => 'Статус доступа',
-				"SORT" => 300
+				"SORT" => 600
 			),
 			"CACHE" => array(
 				"NAME" => 'Настройки кеширования',
-				"SORT" => 900            
+				"SORT" => 1200        
 			)
 		)
 		);
 		$arComponentParameters["PARAMETERS"] = array(
-			"IBLOCK_CODE" => array(
+			"ELEM_OLD" => array(
 				"PARENT" => "DATA_SEC",
 				"NAME" => "Только просроченные",
 				"TYPE" => "CHECKBOX",
