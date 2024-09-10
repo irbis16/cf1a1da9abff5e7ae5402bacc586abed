@@ -2,19 +2,13 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Секретный раздел");
 ?>
-<?
-$oDateTime = date('d.m.Y H:i:s');
-$arrFilterCurDate = Array("<DATE_ACTIVE_TO" => $oDateTime);
-$cat_filter[">"."DATE_ACTIVE_TO"] = date("Y-m-d");
-//$arDayFilter['<=DATE_ACTIVE_TO'] = $oDateTime;
-echo $oDateTime;
-?>
+
 <?
 $APPLICATION->IncludeComponent(
 	"ylab:elements.list", 
 	".default", 
 	array(
-        "FILTER_NAME" => "cat_filter",
+        "FILTER_NAME" => "",
         "ACTIVE_DATE_FORMAT" => "Y-m-d",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
@@ -81,4 +75,5 @@ $APPLICATION->IncludeComponent(
 		"COMPONENT_TEMPLATE" => ".default"
 	),
 	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);
+?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
