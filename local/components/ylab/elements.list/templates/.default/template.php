@@ -42,4 +42,5 @@ $oDateTime = new DateTime();
 if($arParams["ELEM_OLD"]!="N" ):?>
     <span class="news-date-time"><?echo "Выбрано YES"?></span>
     <?endif?>
+   
 </div>

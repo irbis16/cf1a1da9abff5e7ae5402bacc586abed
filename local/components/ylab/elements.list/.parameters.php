@@ -36,6 +36,7 @@ $arComponentParameters = array (
 			"DEFAULT" => "N",
 			"REFRESH" => "N",
 		),
+		"FILTER_NAME" => "arrFilterCurDate",
 	);
 
 
