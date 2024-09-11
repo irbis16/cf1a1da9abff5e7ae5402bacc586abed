@@ -2,14 +2,14 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Секретный раздел");
 ?>
-
+<?
+?>
 <?
 $APPLICATION->IncludeComponent(
 	"ylab:elements.list", 
 	".default", 
 	array(
-        "FILTER_NAME" => "",
-        "ACTIVE_DATE_FORMAT" => "Y-m-d",
+		"ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"ADD_SECTIONS_CHAIN" => "Y",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_ADDITIONAL" => "",
@@ -29,18 +29,17 @@ $APPLICATION->IncludeComponent(
 		"DISPLAY_PREVIEW_TEXT" => "Y",
 		"DISPLAY_TOP_PAGER" => "N",
 		"FIELD_CODE" => array(
-            
 			0 => "NAME",
 			1 => "DATE_ACTIVE_FROM",
 			2 => "ACTIVE_FROM",
 			3 => "DATE_ACTIVE_TO",
 			4 => "ACTIVE_TO",
 			5 => "",
-            
 		),
-
+		"FILTER_NAME" => "",
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
-		"IBLOCK_CODE" => "security_section",
+		"IBLOCK_ID" => "",
+        "IBLOCK_CODE" => "security_section",
 		"IBLOCK_TYPE" => "access",
 		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -75,5 +74,4 @@ $APPLICATION->IncludeComponent(
 		"COMPONENT_TEMPLATE" => ".default"
 	),
 	false
-);
-?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

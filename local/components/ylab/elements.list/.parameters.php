@@ -34,9 +34,9 @@ $arComponentParameters = array (
 			"NAME" => "Только просроченные",
 			"TYPE" => "CHECKBOX",
 			"DEFAULT" => "N",
-			"REFRESH" => "N",
+			//"REFRESH" => "N",
 		),
-		"FILTER_NAME" => "arrFilterCurDate",
+
 	);
 
 
@@ -67,3 +67,4 @@ $arComponentParameters = array (
 		);
 
 */
+?>

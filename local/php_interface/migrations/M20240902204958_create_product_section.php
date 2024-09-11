@@ -583,4 +583,13 @@ class M20240902204433 extends Version
 ));
 
     }
+    public function down()
+    {
+        $helper = $this->getHelperManager();
+        $iblockId = $helper->Iblock()->getIblockId($helper->Iblock()->getIblockId('products'));
+
+        foreach ($helper->Iblock()->getSections($iblockId) as $category) {
+            $helper->Iblock()->deleteSectionIfExists($iblockId, $category['CODE']);
+        }
+    } 
 }

@@ -15,6 +15,16 @@ class ElementsList extends \CBitrixComponent
     }
     public function executeComponent()
     {
+
+
+        //$oDateTime = date('d.m.Y H:i:s');
+        $arrFilterCurDate = [
+        'IBLOCK_CODE' => $arParams['IBLOCK_CODE'],
+        "IBLOCK_CODE" => "security_section",
+        'ACTIVE' => 'Y', 
+        //'<DATE_ACTIVE_TO' => $oDateTime,           
+        ];
+
         $arParams = &$this->arParams;
         $arResult = &$this->arResult;
         $arResult = [
@@ -27,10 +37,7 @@ Loader::includeModule('iblock');
 if ($this->StartResultCache()) {
     $dbItems = $dctElement = CIBlockElement::GetList(
         [],
-        [
-            'IBLOCK_CODE' => $arParams['IBLOCK_CODE'],
-            'ACTIVE' => 'Y',            
-        ],
+        $arrFilterCurDate,
         false,
         false,     
         [
