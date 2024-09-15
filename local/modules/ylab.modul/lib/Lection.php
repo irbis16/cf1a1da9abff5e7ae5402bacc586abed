@@ -1,5 +1,5 @@
 <?php
-
+//Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
 namespace Ylab\Modul;
 //use Bitrix\Main\Loader;
 use Ylab\Modul\Orm\LectionTable;

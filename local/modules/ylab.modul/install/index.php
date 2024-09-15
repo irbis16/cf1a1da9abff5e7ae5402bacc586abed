@@ -11,7 +11,10 @@ use Exception;
 use Bitrix\Main\DB\SqlExpression;
 use Bitrix\Main\ORM\Fields\IntegerField;
 Loc::loadMessages(__FILE__);
-
+//Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
+//use Ylab\Modul\Orm\LectionTable;
+//use Ylab\Modul;
+/*
 class LectionTable extends DataManager
 {
     public static function getTableName()
@@ -36,7 +39,7 @@ class LectionTable extends DataManager
             ]),
         ];
     }
-}*
+}*/
 
 class ylab_modul extends CModule
 {

@@ -1,6 +1,5 @@
 <?
 namespace Ylab\Modul\Orm;
-
 Loc::loadMessage(__FILE__);
 class LectionTable extends DataManager
 {
@@ -54,3 +53,4 @@ class LectionTable extends DataManager
             }
     }
 }
+/** */

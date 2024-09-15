@@ -1,4 +1,5 @@
 <?php
+//Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
 AddEventHandler("iblock", "OnBeforeIBlockElementAdd", Array("MyClass40", "OnBeforeIBlockElementAddHandler"));
 class MyClass40{
 static function OnBeforeIBlockElementAddHandler(&$arFields)
