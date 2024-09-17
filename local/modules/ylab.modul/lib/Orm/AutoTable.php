@@ -1,11 +1,11 @@
 <?
 namespace Ylab\Modul\Orm;
 Loc::loadMessage(__FILE__);
-class LectionTable extends DataManager
+class AutoTable extends DataManager
 {
     public static function getTableName()
     {
-        return "ylab_lections";
+        return "ylab_auto";
     }
     
     public static function getMap()
@@ -40,7 +40,7 @@ class LectionTable extends DataManager
             ]),
 
             ];
-            /*foreach ($lectionsData as $number => $lectionData) {
+            foreach ($lectionsData as $number => $lectionData) {
                 $lectionObject = LectionTable::getEntity()->createObject();
                 $lectionObject['LECTION_NUMBER'] = $NUMBER + 1;
                 $lectionObject['LECTION_NAME'] = $lectionData['LECTION_NAME'];
@@ -50,7 +50,7 @@ class LectionTable extends DataManager
                     throw new \Exception(implode(', ' . $saveResult->getErrorMessages()));
                 }
 
-            }*/
+            }
     }
 }
 /** */

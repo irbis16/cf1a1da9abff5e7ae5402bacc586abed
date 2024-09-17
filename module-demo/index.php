@@ -8,8 +8,9 @@ require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle('Демо модуля');
 
 Loader::requireModule('ylab.modul');
-Lection::helloWorld();
-
+//Lection::helloWorld();
+Lection::fillDemoLections();
+/*
 $items = ElementTable::query()
     ->setFilter([
         'IBLOCK_ID' => '5',
@@ -25,7 +26,7 @@ $items = ElementTable::query()
     ->fetchCollection();
     //$code = $items->getCodeList();
     $code = $items->getIdList();
-/**/
+
 ?>$items ($code):<br/><?php
 ?><pre><?var_dump($code)?></pre><?
 /* */

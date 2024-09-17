@@ -1,6 +1,8 @@
 <?
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
+//use \Bitrix\Main\Loader; 
+//Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
 use Bitrix\Main\Entity\Base;
 use Bitrix\Main\Localization\Loc;
 use Bitrix\Main\ModuleManager;
@@ -11,11 +13,11 @@ use Exception;
 use Bitrix\Main\DB\SqlExpression;
 use Bitrix\Main\ORM\Fields\IntegerField;
 Loc::loadMessages(__FILE__);
-//Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
-//use Ylab\Modul\Orm\LectionTable;
+//Loader::registerNamespace('Ylab\Modul', 'local/modules/ylab.modul/lib');
+//
 //use Ylab\Modul;
 /*
-class LectionTable extends DataManager
+class LectionTable extends DataManager 
 {
     public static function getTableName()
     {
@@ -30,17 +32,70 @@ class LectionTable extends DataManager
             ]),
             'ACTIVE' => new ORM\Fields\BooleanField('ACTIVE', [
                 'values' => ['N', 'Y'],
-                'default_value' => 'Y',
+                'default' => 'Y',
                 'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
             ]),
+
             'SORT' => new ORM\Fields\IntegerField('SORT', [
-                'default_value' => '500',
+                'default' => '500',
                 'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
             ]),
         ];
     }
 }*/
 
+class LectionTable extends DataManager
+{
+    public static function getTableName()
+    {
+        return "ylab_lections";
+    }
+    
+    public static function getMap()
+    {
+        return[
+            new IntegerField("ID", [
+                "primary" => true,
+                "autocomplete" => true,
+                ]),
+            'ACTIVE' => new ORM\Fields\BooleanField('ACTIVE', [
+            'values' => ['N', 'Y'],
+            'default_value' => 'Y',
+            'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
+            ]),
+            'SORT' => new ORM\Fields\IntegerField('SORT', [
+            'default_value' => '500',
+            'title' => Loc::getMessage('LECTION_TABLE_FIELD_SORT'),
+            ]),
+            'DATE' => new ORM\Fields\DatetimeField('DATE', [
+            'default_value' => function() {
+                return new Main\Type\DateTime();
+            },
+            'title' => Loc::getMessage('LECTION_TABLE_FIELD_DATE'),
+            ]),
+            
+            'LECTION_NUMBER' => new ORM\Fields\IntegerField ('LECTION_NUMBER', [
+            'title' => Loc::getMessage('LECTION_TABLE_FIELD_LECTION_NUMBER')
+            ]), 
+            
+            'LECTION_NAME' => new ORM\Fields\StringField( 'LECTION_NAME', [
+            'title' => Loc::getMessage('LECTION_TABLE_FIELD_LECTION_NAME'),
+            ]),
+
+            ];
+            /*foreach ($lectionsData as $number => $lectionData) {
+                $lectionObject = LectionTable::getEntity()->createObject();
+                $lectionObject['LECTION_NUMBER'] = $NUMBER + 1;
+                $lectionObject['LECTION_NAME'] = $lectionData['LECTION_NAME'];
+
+                $saveResult = $lectionObject->save();
+                if(!$saveResult->isSuccess()) {
+                    throw new \Exception(implode(', ' . $saveResult->getErrorMessages()));
+                }
+
+            }*/
+    }
+}
 class ylab_modul extends CModule
 {
     public $MODULE_ID = 'ylab.modul';
@@ -97,7 +152,8 @@ class ylab_modul extends CModule
 
     public function UnInstallFiles()
     {
-        DeleteDirFiles($_SERVER["DOCUMENT_ROOT"]."/local/components/", $_SERVER["DOCUMENT_ROOT"]."/bitrix/components/");
+        DeleteDirFilesEx(/*__DIR__.*/'bitrix/components/ylab');
+        //DeleteDirFiles($_SERVER["DOCUMENT_ROOT"]."/local/components/", $_SERVER["DOCUMENT_ROOT"]."/bitrix/components/");
     }
     public function UnInstallDB()
     
