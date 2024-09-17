@@ -16,86 +16,7 @@ Loc::loadMessages(__FILE__);
 //Loader::registerNamespace('Ylab\Modul', 'local/modules/ylab.modul/lib');
 //
 //use Ylab\Modul;
-/*
-class LectionTable extends DataManager 
-{
-    public static function getTableName()
-    {
-        return "ylab_lections";
-    }
-    public static function getMap()
-    {
-        return[
-            new IntegerField("ID", [
-                "primary" => true,
-                "autocomplete" => true,
-            ]),
-            'ACTIVE' => new ORM\Fields\BooleanField('ACTIVE', [
-                'values' => ['N', 'Y'],
-                'default' => 'Y',
-                'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
-            ]),
 
-            'SORT' => new ORM\Fields\IntegerField('SORT', [
-                'default' => '500',
-                'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
-            ]),
-        ];
-    }
-}*/
-
-class LectionTable extends DataManager
-{
-    public static function getTableName()
-    {
-        return "ylab_lections";
-    }
-    
-    public static function getMap()
-    {
-        return[
-            new IntegerField("ID", [
-                "primary" => true,
-                "autocomplete" => true,
-                ]),
-            'ACTIVE' => new ORM\Fields\BooleanField('ACTIVE', [
-            'values' => ['N', 'Y'],
-            'default_value' => 'Y',
-            'title' => Loc::getMessage('LECTION_TABLE_FIELD_ACTIVE'),
-            ]),
-            'SORT' => new ORM\Fields\IntegerField('SORT', [
-            'default_value' => '500',
-            'title' => Loc::getMessage('LECTION_TABLE_FIELD_SORT'),
-            ]),
-            'DATE' => new ORM\Fields\DatetimeField('DATE', [
-            'default_value' => function() {
-                return new Main\Type\DateTime();
-            },
-            'title' => Loc::getMessage('LECTION_TABLE_FIELD_DATE'),
-            ]),
-            
-            'LECTION_NUMBER' => new ORM\Fields\IntegerField ('LECTION_NUMBER', [
-            'title' => Loc::getMessage('LECTION_TABLE_FIELD_LECTION_NUMBER')
-            ]), 
-            
-            'LECTION_NAME' => new ORM\Fields\StringField( 'LECTION_NAME', [
-            'title' => Loc::getMessage('LECTION_TABLE_FIELD_LECTION_NAME'),
-            ]),
-
-            ];
-            /*foreach ($lectionsData as $number => $lectionData) {
-                $lectionObject = LectionTable::getEntity()->createObject();
-                $lectionObject['LECTION_NUMBER'] = $NUMBER + 1;
-                $lectionObject['LECTION_NAME'] = $lectionData['LECTION_NAME'];
-
-                $saveResult = $lectionObject->save();
-                if(!$saveResult->isSuccess()) {
-                    throw new \Exception(implode(', ' . $saveResult->getErrorMessages()));
-                }
-
-            }*/
-    }
-}
 class ylab_modul extends CModule
 {
     public $MODULE_ID = 'ylab.modul';
@@ -108,7 +29,7 @@ class ylab_modul extends CModule
         $this->MODULE_VERSION = $arModuleVersion["VERSION"];
         $this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
 
-        include(__DIR__ . '/../locale/ru.php');
+        //include(__DIR__ . '/../locale/ru.php');
             $this->MODULE_NAME = Loc::getMessage('YLAB_MODUL_MODULE_NAME');
             $this->MODULE_DESCRIPTION = Loc::getMessage('YLAB_MODUL_DESCRIPTION');
             $this->PARTNER_NAME = Loc::getMessage('YLAB_MODUL_PARTNER_NAME');
@@ -125,15 +46,16 @@ class ylab_modul extends CModule
     }
     public function InstallFiles()
     {
-        CopyDirFiles(getenv("DOCUMENT_ROOT") . '/local/components/', getenv("DOCUMENT_ROOT") . '/bitrix/components/', true, true);
+        CopyDirFiles(__DIR__ . '/bitrix/components/', getenv("DOCUMENT_ROOT") . '/bitrix/components/', true, true);
+        //CopyDirFiles(getenv("DOCUMENT_ROOT") . '/local/components/', getenv("DOCUMENT_ROOT") . '/bitrix/components/', true, true);
         //CopyDirFiles(__DIR__ . "/bitrix/components", $_SERVER["DOCUMENT_ROOT"] . "/bitrix/components", true, true);
     }
     public function InstallDB()
     {
         $connection = \Bitrix\Main\Application::getConnection();
-        if(!$connection->isTableExists(LectionTable::getTableName()))
+        if(!$connection->isTableExists(AutoTable::getTableName()))
         {
-            LectionTable::getEntity()->createDbTable();
+            AutoTable::getEntity()->createDbTable();
         }
     }
     public function InstallEvents()
@@ -159,9 +81,9 @@ class ylab_modul extends CModule
     
     {
         $connection = \Bitrix\Main\Application::getConnection();
-        if($connection->isTableExists(LectionTable::getTableName()))
+        if($connection->isTableExists(AutoTable::getTableName()))
         {
-            $connection->dropTable(LectionTable::getTableName());
+            $connection->dropTable(AutoTable::getTableName());
         }
     }
 

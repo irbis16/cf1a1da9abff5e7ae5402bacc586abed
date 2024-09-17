@@ -1,15 +1,15 @@
 <?php
 /**@global Cmain $APPLICATION */
-use Bitrix\Iblock\ElementTable;
+//use Bitrix\Iblock\ElementTable;
 use Bitrix\Main\Loader;
-use Ylab\Modul\Lection;
+//use Ylab\Modul\Lection;
 
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle('Демо модуля');
 
 Loader::requireModule('ylab.modul');
 //Lection::helloWorld();
-Lection::fillDemoLections();
+//Lection::fillDemoLections();
 /*
 $items = ElementTable::query()
     ->setFilter([
@@ -30,6 +30,14 @@ $items = ElementTable::query()
 ?>$items ($code):<br/><?php
 ?><pre><?var_dump($code)?></pre><?
 /* */
+$APPLICATION->IncludeComponent(
+    "ylab:demo",
+    "",
+    array(
+        "COMPONENT_TEMPLATE" => "",
+    ),
+    false
+);
 
 ?>111111<?php
 require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');
