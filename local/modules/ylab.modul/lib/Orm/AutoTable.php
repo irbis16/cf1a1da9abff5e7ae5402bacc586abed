@@ -1,6 +1,8 @@
 <?
+
 namespace Ylab\Modul\Orm;
-Loc::loadMessage(__FILE__);
+use Bitrix\Main\Localization\Loc;
+Loc::loadMessages(__FILE__);
 class AutoTable extends DataManager
 {
     public static function getTableName()

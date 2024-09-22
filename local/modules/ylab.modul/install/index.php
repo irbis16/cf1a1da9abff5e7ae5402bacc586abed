@@ -1,18 +1,34 @@
 <?
+//use Ylab\Modul\Orm\AutoTable;
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
+//Loader::registerNamespace('Ylab\Modul', getenv("DOCUMENT_ROOT") . '/local/modules/ylab.modul/lib/');
+
+
 //use \Bitrix\Main\Loader; 
 //Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
 use Bitrix\Main\Entity\Base;
 use Bitrix\Main\Localization\Loc;
+Loc::loadMessages(__FILE__);
 use Bitrix\Main\ModuleManager;
-use Bitrix\Main\ORM;
+//use Bitrix\Main\ORM;
+use Bitrix\Main\EventManager;
 use Bitrix\Main\Entity\DataManager;
 use Bitrix\Main\Entity\ExpressionField;
 use Exception;
 use Bitrix\Main\DB\SqlExpression;
 use Bitrix\Main\ORM\Fields\IntegerField;
-Loc::loadMessages(__FILE__);
+use Ylab\Modul;
+//use Ylab\Modul\Orm;
+Loader::registerNamespace('Ylab\Modul\Orm', getenv("DOCUMENT_ROOT") . '/local/modules/ylab.modul/lib/orm/');
+use Ylab\Modul\Orm\AutoTable;
+//use AutoTable;
+//Loader::registerNamespace('Ylab\Modul', __DIR__ . '/lib');
+//Loader::registerNamespace('Ylab\Modul', __DIR__ . '/lib/orm');
+//Loc::loadMessage(__FILE__);
+
+//Orm::AutoTable();
+//use Ylab\Modul\Orm\AutoTable;
 //Loader::registerNamespace('Ylab\Modul', 'local/modules/ylab.modul/lib');
 //
 //use Ylab\Modul;
@@ -34,7 +50,8 @@ class ylab_modul extends CModule
             $this->MODULE_DESCRIPTION = Loc::getMessage('YLAB_MODUL_DESCRIPTION');
             $this->PARTNER_NAME = Loc::getMessage('YLAB_MODUL_PARTNER_NAME');
             $this->PARTNER_URI = Loc::getMessage('YLAB_MODUL_PARTNER_URI');
-
+            //Loader::registerNamespace('Ylab\Modul', dirname(__DIR__) . '/lib');
+            //$this->connection = Application::getConnection();
     }
 
     public function DoInstall()
@@ -43,6 +60,7 @@ class ylab_modul extends CModule
         $this->InstallDB();
         $this->InstallEvents();
         RegisterModule($this->MODULE_ID);
+
     }
     public function InstallFiles()
     {
@@ -52,12 +70,16 @@ class ylab_modul extends CModule
     }
     public function InstallDB()
     {
+        //Loader::includeModule($this->MODULE_ID);
+        //Loader::includeModule($this->MODULE_ID);
         $connection = \Bitrix\Main\Application::getConnection();
         if(!$connection->isTableExists(AutoTable::getTableName()))
         {
             AutoTable::getEntity()->createDbTable();
         }
     }
+
+
     public function InstallEvents()
     {
         $eventManager = \Bitrix\Main\EventManager::getInstance();
