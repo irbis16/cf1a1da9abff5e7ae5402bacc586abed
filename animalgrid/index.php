@@ -7,5 +7,9 @@ $APPLICATION->IncludeComponent(
 	"ylab:animalgrid", 
 	".default", 
 	[],
-	false
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+	false,
+    false
+);?>
+
+
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
