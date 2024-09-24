@@ -8,6 +8,7 @@ use Bitrix\Main\Loader;
 use Bitrix\Main\ErrorCollection;
 use Bitrix\Main\Grid\Options as GridOptions;
 use Bitrix\Main\UI\PageNavigation;
+use \Bitrix\Iblock\PropertyEnumerationTable;
 //use Bitrix\Main\UI\PageNavigation;
 //use Bitrix\Main\UI\PageNavigation;
 //use \Bitrix\Main\Type\DateTime as DT;
@@ -54,13 +55,13 @@ $arResult = [
         ],
         [
             'id' => 'UF_BTHDAY',
-            'name' => 'Пол',
+            'name' => 'День рожденья',
             'sort' => 'UF_BTHDAY',
             'default' => true
         ],
         [
             'id' => 'UF_GEN',
-            'name' => 'Пол',
+            'name' => 'Родословная',
             'sort' => 'UF_GEN',
             'default' => true
         ],
