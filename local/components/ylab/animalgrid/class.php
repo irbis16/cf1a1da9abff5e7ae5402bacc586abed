@@ -5,6 +5,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
 }
 /**@global CMain $APPLICATION */
 use Bitrix\Main\Loader;
+use \Bitrix\Main\Errorable;
 use Bitrix\Main\ErrorCollection;
 use Bitrix\Main\Grid\Options as GridOptions;
 use Bitrix\Main\UI\PageNavigation;
@@ -16,9 +17,44 @@ use \Bitrix\Iblock\PropertyEnumerationTable;
 use Bitrix\Highloadblock\HighloadBlockTable;
 
 
-class AnimalGrid extends CBitrixComponent
+class AnimalGrid extends \CBitrixComponent implements \Bitrix\Main\Engine\Contract\Controllerable, \Bitrix\Main\Errorable
 {
     protected static $componentCounter = 0;
+
+    /** @var ErrorCollection */
+    protected $errorCollection;
+    public function configureActions()
+    {
+        return[];
+    }
+
+    public function onPrepareComponentParams($arParams)
+    {
+        $this->errorCollection = new ErrorCollection();
+    }
+
+    public function getTimeAction($format)
+    {
+        return date($format);
+    }
+
+/**
+ * @return \Bitrix\MainError[]
+ */
+public function getErrors()
+{
+    return $this->errorCollection->toArray();
+}
+
+/**
+ * @param string $code Code of error.
+ * @return \Bitrix\MainError
+ */
+public function getErrorsByCode($code)
+{
+    return $this->errorCollection->getErrorsByCode($code);
+}
+
 
     public function executeComponent()
     {

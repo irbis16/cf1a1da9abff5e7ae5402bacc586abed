@@ -1,10 +1,40 @@
 <?php
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+
+use Bitrix\UI\Buttons\Button;
+use Bitrix\UI\Buttons\Color;
+use Bitrix\UI\Buttons\Icon;
+
+$this->setFrameMode(true);
+$listId = $arResult['LIST_ID'];
+$gridId = $arResult['GRID_ID'];
+$columns = $arResult['COLUMNS'];
+$rows = $arResult['ROWS'];
+
+$navObject = $arResult['NAV_OBJECT'];
+$totalRowsCount = $arResult['TOTAL_ROWS_COUNT'];
 $pageSizes = $arResult['PAGE_SIZES'];
 $actionPanel = $arResult['ACTION_PANEL'];
 $filterParams = $arResult['FILTER_PARAMS'];
 ?><div class="wrapper">
+<div>
 <?php
+    echo (new Button ([
+    'color' => Color::PRIMARY,
+    'icon' => Icon::DONE,
+    'text' => 'Получить время сервера',
+    'classList' => ['js-action'],
+    'dataset' => [
+        'action' => 'getTime',
+        'confirm' => true
+    ],
+
+    ]))->render();
+    ?></div>
+    <div class="js-time-container">
+    </div>
+    <?php
+
 $arFilterComponentParams = [
     'FILTER_ID' => $listId,
     'GRID_ID' => $gridId,
